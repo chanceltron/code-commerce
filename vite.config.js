@@ -6,6 +6,6 @@ export default defineConfig({
   base: '/code-commerce-project/',
   plugins: [react()],
   server: {
-    port: 3000,
+    port: 5500,
   },
 });

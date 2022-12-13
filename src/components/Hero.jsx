@@ -7,7 +7,7 @@ export default class Hero extends Component {
       <div className={style.heroContainer}>
         <div className={style.heroContent}>
           <h3 className={style.contentHeader}>
-            Looking for ready-to-use <br /> components?
+            Want to take your education <br /> to the next level?
           </h3>
           <p className={style.contentText}>codeCommerce has you covered</p>
         </div>

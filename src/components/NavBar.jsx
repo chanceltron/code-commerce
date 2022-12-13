@@ -10,7 +10,8 @@ export default class NavBar extends Component {
           <button className='btn-primary'>Sign up</button>
           <button className='btn-secondary'>Log in</button>
           <a className='btn-icon'>
-            <i class='fa-solid fa-cart-shopping'></i>
+            <i className='fa-solid fa-cart-shopping'></i>
+            <i className={`fa-solid fa-circle-exclamation ${style.alert}`}></i>
           </a>
         </div>
       </div>

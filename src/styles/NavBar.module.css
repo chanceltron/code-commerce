@@ -16,3 +16,15 @@
   align-items: center;
   gap: 10px;
 }
+
+.btn-icon {
+  position: relative;
+}
+
+.alert {
+  position: absolute;
+  top: 12px;
+  right: 22px;
+  color: red;
+  font-size: 0.8rem;
+}
