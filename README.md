@@ -28,8 +28,8 @@ The goal is to master components, props, state and conditional UI rendering.
 ### 🛠 Signup/Login
 
 - [ ] User can sign-in
-- [ ] Password field is obscured
-- [ ] There is an "eye" icon next to password to reveal what is being typed
+- [x] Password field is obscured
+- [x] There is an "eye" icon next to password to reveal what is being typed
 - [ ] If password is invalid, show an error message as depicted in the screenshot below
 - [ ] If successful sign-in, take user to Customer Cart
 - [ ] User can switch between Sign in and Create Account

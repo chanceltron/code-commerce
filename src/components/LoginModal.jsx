@@ -1,8 +1,33 @@
 import React, { Component } from 'react';
+import { itemList } from '../js/itemList';
 import style from '../styles/LoginModal.module.css';
 
 export default class LoginModal extends Component {
+  state = {
+    showPassword: false,
+    passwordIcon: 'fa-regular fa-eye',
+  };
+
+  passwordType = this.state.showPassword ? 'text' : 'password';
+
+  signupInputs = [
+    { name: 'email', type: 'email' },
+    { name: 'password', type: this.passwordType, icon: this.state.passwordIcon },
+    { name: 'confirm password', type: this.passwordType, icon: this.state.passwordIcon },
+  ];
+
+  handlePassword = () => {
+    this.setState({
+      showPassword: this.state.showPassword ? false : true,
+      passwordIcon: this.state.showPassword ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash',
+    });
+  };
+
   render() {
+    const loginInputs = [
+      { name: 'email', type: 'email' },
+      { name: 'password', type: this.state.showPassword ? 'text' : 'password', icon: this.state.passwordIcon },
+    ];
     return (
       <div className={style.loginModal}>
         <div className={style.modalContainer}>
@@ -12,16 +37,17 @@ export default class LoginModal extends Component {
           </div>
           <div className={style.modalBody}>
             <form className={style.modalForm}>
-              <label className={style.label} htmlFor='email'>
-                {' '}
-                Email Address
-              </label>
-              <input className={style.input} type='email' id='email' />
-              <label className={style.label} htmlFor='password'>
-                {' '}
-                Password
-              </label>
-              <input className={style.input} type='password' name='password' id='password' />
+              {loginInputs.map((input) => (
+                <div className={style.inputField} key={input.name}>
+                  <label className={style.label} htmlFor={input.name}>
+                    {input.name}
+                  </label>
+                  <div className={style.inputWrapper}>
+                    <input className={style.input} type={input.type} id={input.name}></input>
+                    <i onClick={this.handlePassword} className={input.icon}></i>
+                  </div>
+                </div>
+              ))}
             </form>
           </div>
         </div>

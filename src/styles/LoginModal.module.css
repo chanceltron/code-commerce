@@ -37,20 +37,35 @@
   gap: 1rem;
 }
 
+.inputField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
 .label {
   font-size: 1.2rem;
-  font-weight: 600;
+  text-transform: capitalize;
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 0.1rem 0.5rem;
 }
 
 .input {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+  width: 100%;
 }
 
-.input:focus {
+.inputWrapper:focus-within {
   outline: none;
-  border: 1px solid #000;
+  border: 1px solid #646cff;
 }
 
 .btn {
@@ -61,5 +76,9 @@
   padding: 0.5rem 1rem;
   border-radius: 3px;
   font-weight: 500;
+  cursor: pointer;
+}
+
+i {
   cursor: pointer;
 }
