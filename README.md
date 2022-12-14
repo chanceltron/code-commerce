@@ -25,7 +25,7 @@ Note: Please do NOT use React Routing in this project. You will learn about it l
 The goal is to master components, props, state and conditional UI rendering.
 ```
 
-### 🛠 Signup/Login
+### :busts_in_silhouette: Signup/Login
 
 - [ ] User can sign-in
 - [x] Password field is obscured
@@ -37,11 +37,11 @@ The goal is to master components, props, state and conditional UI rendering.
 - [ ] Passwords must match or show appropriate error as depicted below
 - [ ] First name and last name cannot have numbers
 - [ ] Postal code must not allow text (numbers only)
-- [ ] Show an "eye" icon next to password to reveal what is being typed
+- [x] Show an "eye" icon next to password to reveal what is being typed
 - [ ] If an account for that email already exists, show an error message
 - [ ] Add a facebook sign in button (non-functional).
 
-### 🛠 Customer Cart
+### :shopping_cart: Customer Cart
 
 - [ ] Create a cart that has 2-5 items in it
 - [ ] These should be actual components with item value
@@ -50,7 +50,7 @@ The goal is to master components, props, state and conditional UI rendering.
 - [ ] If there are zero cart items the Checkout button should be disabled
 - [ ] If Checkout is selected move to the shipping screen
 
-### 🛠 Shipping Information
+### :airplane: Shipping Information
 
 - [ ] Show all shipping fields as depicted in the screenshot below
 - [ ] Have standard and express shipping options -- the shipping & handling/checkout prices should adjust accordingly
@@ -60,7 +60,7 @@ The goal is to master components, props, state and conditional UI rendering.
 - [ ] Back to cart button should go back to cart
 - [ ] There should be a Next or "Payment" button to go to next screen
 
-### 🛠 Payment Information
+### :credit_card: Payment Information
 
 - [ ] Create a credit card formatted that takes all major credit cards (Visa, Master Card, American Express, etc)
 - [ ] Format the credit card field so the numbers are properly spaced (we don't want it to look ugly!)
@@ -71,7 +71,7 @@ The goal is to master components, props, state and conditional UI rendering.
 - [ ] The Pay button should take the user to the confirmation screen
 - [ ] A user should be able to apply a promo code and receive a discount
 
-### 🛠 Confirmation Screen
+### :white_check_mark: Confirmation Screen
 
 - [ ] Should show amount paid
 - [ ] Should show last 4 digits of credit card used to make the purchase
