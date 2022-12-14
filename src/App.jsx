@@ -10,8 +10,17 @@ export default class App extends Component {
     isLoggedIn: false,
     isInLogin: false,
     isInSignup: false,
-    isIinCart: false,
+    isInCart: false,
     cart: [],
+  };
+
+  handleButton = (value) => {
+    if (value === 'login') {
+      this.setState({ isInLogin: true });
+    }
+    if (value === 'signup') {
+      this.setState({ isInSignup: true });
+    }
   };
 
   addToCart = (item) => {
@@ -21,12 +30,12 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar handleButton={this.handleButton} />
         <div className='container'>
           <Hero />
           <Store />
         </div>
-        <LoginModal />;
+        <LoginModal isInLogin={this.state.isInLogin} />;
       </div>
     );
   }

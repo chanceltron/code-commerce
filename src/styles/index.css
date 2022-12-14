@@ -21,12 +21,12 @@ img {
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #c72c72;
   text-decoration: inherit;
   cursor: pointer;
 }
 a:hover {
-  color: #747bff;
+  color: #b32967;
 }
 
 body {
@@ -58,7 +58,7 @@ button {
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  transition: all 0.25s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 button:focus,
 button:focus-visible {
@@ -79,24 +79,24 @@ input:focus {
 }
 
 .btn-primary {
-  background-color: #646cff;
+  background: linear-gradient(30deg, #644775 0%, #c72c72 100%);
   color: #ffffff;
 }
 .btn-secondary {
   background-color: #ffffff;
-  color: #646cff;
-  border: 1px solid #646cff;
+  color: #c72c72;
+  border: 1px solid #c72c72;
 }
 .btn-icon {
-  color: #646cff;
+  color: #c72c72;
   font-size: 25px;
   padding: 0.5em;
 }
 .btn-primary:hover {
-  background-color: #747bff;
+  background: linear-gradient(30deg, #5a4169 0%, #b32967 100%);
 }
 .btn-secondary:hover {
-  background-color: #f5f5ff;
+  background-color: #fce9f2;
 }
 
 .container {
