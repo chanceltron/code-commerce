@@ -8,18 +8,18 @@ import style from './styles/App.module.css';
 export default class App extends Component {
   state = {
     isLoggedIn: false,
-    isInLogin: false,
+    isInLogin: false, //! Change to false once done with styling
     isInSignup: false,
     isInCart: false,
     cart: [],
   };
 
-  handleButton = (value) => {
+  handleButton = (value, bool) => {
     if (value === 'login') {
-      this.setState({ isInLogin: true });
+      this.setState({ isInLogin: bool });
     }
     if (value === 'signup') {
-      this.setState({ isInSignup: true });
+      this.setState({ isInSignup: bool });
     }
   };
 
@@ -28,14 +28,18 @@ export default class App extends Component {
   };
 
   render() {
+    let currentModal;
+    if (this.state.isInLogin || this.state.isInSignup) {
+      currentModal = <LoginModal isInLogin={this.state.isInLogin} isInSignup={this.state.isInSignup} handleButton={this.handleButton} />;
+    }
     return (
       <div>
-        <NavBar handleButton={this.handleButton} />
+        <NavBar handleButton={this.handleButton} cartLength={this.state.cart.length} />
         <div className='container'>
           <Hero />
           <Store />
         </div>
-        <LoginModal isInLogin={this.state.isInLogin} />;
+        {currentModal}
       </div>
     );
   }

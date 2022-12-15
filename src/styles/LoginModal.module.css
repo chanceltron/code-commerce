@@ -12,10 +12,21 @@
 }
 
 .modalContainer {
+  max-width: 400px;
+  width: 100%;
   background-color: #fff;
   padding: 2rem;
   border-radius: 3px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.modalClose {
+  position: absolute;
+  font-size: 1.5rem;
+  cursor: pointer;
+  top: 7px;
+  right: 10px;
 }
 
 .modalHeader {
@@ -23,6 +34,31 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+}
+
+.switcherBtns {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+}
+.switcher {
+  background-color: transparent;
+  padding: 1rem;
+  padding-bottom: 0.2rem;
+  border-radius: 0;
+  border-bottom: 4px solid #f0f0f0;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.switcher.active {
+  border-bottom: 4px solid #c72c72;
+}
+.switcher:hover {
+  border-bottom: 4px solid #c72c72;
+}
+.switcher:focus {
+  outline: none;
 }
 
 .modalBody {
@@ -37,48 +73,20 @@
   gap: 1rem;
 }
 
-.inputField {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.label {
-  font-size: 1.2rem;
-  text-transform: capitalize;
-  display: flex;
-  justify-content: space-between;
-}
-
-.inputWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  padding: 0.1rem 0.5rem;
-}
-
-.input {
-  width: 100%;
-}
-
-.inputWrapper:focus-within {
-  outline: none;
-  border: 1px solid #646cff;
-}
-
 .btn {
-  background-color: #646cff;
   color: #fff;
-  border: none;
-  font-size: 1.2rem;
-  padding: 0.5rem 1rem;
   border-radius: 3px;
   font-weight: 500;
-  cursor: pointer;
+  width: 100%;
+  margin-top: 1.2rem;
 }
 
 i {
   cursor: pointer;
+}
+
+.passIcon {
+  color: #644775;
+  width: 1.5rem;
+  margin-right: 8px;
 }

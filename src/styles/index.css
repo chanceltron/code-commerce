@@ -45,11 +45,6 @@ p {
   padding: 2px 0;
 }
 
-/* p {
-  margin: 0;
-  padding: 4px 0;
-} */
-
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -67,7 +62,6 @@ button:focus-visible {
 
 input {
   border: transparent;
-  padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -98,8 +92,47 @@ input:focus {
 .btn-secondary:hover {
   background-color: #fce9f2;
 }
+.btn-fb {
+  background-color: #3b5998;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+.btn-fb:hover {
+  background-color: #334c81;
+}
+.btn-fb i {
+  font-size: 1.3rem;
+}
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.divider {
+  overflow: hidden;
+  text-align: center;
+  margin-top: 1.2rem;
+  color: #858585;
+}
+.divider:before,
+.divider:after {
+  background-color: #ccc;
+  content: '';
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+.divider:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+.divider:after {
+  left: 0.5em;
+  margin-right: -50%;
 }

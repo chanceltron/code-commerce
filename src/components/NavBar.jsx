@@ -6,8 +6,8 @@ export default class NavBar extends Component {
     super(props);
   }
 
-  buttonHandler = (value) => {
-    this.props.handleButton(value);
+  buttonHandler = ({ target: { value } }) => {
+    this.props.handleButton(value, true);
   };
 
   render() {
@@ -18,11 +18,15 @@ export default class NavBar extends Component {
           <span className={style.typeface}>codeCommerce</span>
         </a>
         <div className={style.buttonContainer}>
-          <button className='btn-primary'>Sign up</button>
-          <button className='btn-secondary'>Log in</button>
+          <button onClick={this.buttonHandler} value='signup' className='btn-primary'>
+            Sign up
+          </button>
+          <button onClick={this.buttonHandler} value='login' className='btn-secondary'>
+            Log in
+          </button>
           <a className='btn-icon'>
             <i className='fa-solid fa-cart-shopping'></i>
-            <i className={`fa-solid fa-circle-exclamation ${style.alert}`}></i>
+            {this.props.cartLength > 0 && <i className={style.alert}>{this.props.cartLength}</i>}
           </a>
         </div>
       </div>
