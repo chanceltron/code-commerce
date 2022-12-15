@@ -39,7 +39,7 @@ The goal is to master components, props, state and conditional UI rendering.
 - [ ] Postal code must not allow text (numbers only)
 - [x] Show an "eye" icon next to password to reveal what is being typed
 - [ ] If an account for that email already exists, show an error message
-- [ ] Add a facebook sign in button (non-functional).
+- [i] Add a facebook sign in button (non-functional).
 
 ### :shopping_cart: Customer Cart
 
