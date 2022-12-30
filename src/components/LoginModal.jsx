@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import { itemList } from '../js/itemList';
+import { INIT_SIGNUP } from '../data/constants';
 import style from '../styles/LoginModal.module.css';
 import InputBase from './InputBase';
-
-const INIT_SIGNUP = { email: '', password: '', confirmPassword: '', firstName: '', lastName: '', postalCode: '' };
 
 export default class LoginModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       signupInputs: INIT_SIGNUP,
-      users: [],
+
       showPassword: false,
       passwordIcon: 'fa-regular fa-eye',
       isActive: false,
@@ -40,52 +38,81 @@ export default class LoginModal extends Component {
   handlePassword = () => {
     this.setState({
       showPassword: this.state.showPassword ? false : true,
-      passwordIcon: this.state.showPassword ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash',
+      passwordIcon: this.state.showPassword
+        ? 'fa-regular fa-eye'
+        : 'fa-regular fa-eye-slash',
     });
   };
 
   handleInputs = ({ target: { name, value } }) => {
-    console.log(name);
-    this.setState((prevState) => ({ signupInputs: { ...prevState.signupInputs, [name]: value } }));
+    this.setState((prevState) => ({
+      signupInputs: { ...prevState.signupInputs, [name]: value },
+    }));
   };
 
   handleNewUser = (e) => {
+    const { handleButton, createNewUser } = this.props;
+
     e.preventDefault();
-    const { email, firstName, lastName, password, postalCode } = this.state.signupInputs;
+    const { email, firstName, lastName, password, postalCode } =
+      this.state.signupInputs;
     const newUser = {
       id: Date.now(),
-      email: email,
-      firstName: firstName,
-      lastName: lastName,
-      password: password,
-      postalCode: postalCode,
+      email,
+      firstName,
+      lastName,
+      password,
+      postalCode,
     };
-    this.setState((prevState) => ({
-      users: [...prevState.users, newUser],
+    handleButton('login', true);
+    handleButton('signup', false);
+    createNewUser(newUser);
+    this.setState(() => ({
+      signupInputs: INIT_SIGNUP,
     }));
-    this.props.handleButton('login', true);
-    this.props.handleButton('signup', false);
   };
 
-  handleLogin = () => {
+  handleLogin = (e) => {
+    const { email, password } = this.state.signupInputs;
     e.preventDefault();
-    console.log('Handling Login');
+    const loginUser = {
+      email,
+      password,
+    };
+    this.props.handleLogin(loginUser);
   };
 
   componentDidMount() {
-    this.props.isInLogin ? this.setState({ isActive: true, activeID: 'login' }) : this.setState({ isActive: true, activeID: 'signup' });
+    this.props.isInLogin
+      ? this.setState({ isActive: true, activeID: 'login' })
+      : this.setState({ isActive: true, activeID: 'signup' });
   }
 
   render() {
     const loginInputs = [
       { name: 'email', type: 'email', label: 'Email Address *' },
-      { name: 'password', type: this.state.showPassword ? 'text' : 'password', icon: `${this.state.passwordIcon} ${style.passIcon}`, label: 'Password *' },
+      {
+        name: 'password',
+        type: this.state.showPassword ? 'text' : 'password',
+        icon: `${this.state.passwordIcon} ${style.passIcon}`,
+        label: 'Password *',
+      },
     ];
 
     const signupInputs = [
       { name: 'email', type: 'email', label: 'Email Address *' },
-      { name: 'password', type: this.state.showPassword ? 'text' : 'password', icon: `${this.state.passwordIcon} ${style.passIcon}`, label: 'Password *' },
-      { name: 'confirmPassword', type: this.state.showPassword ? 'text' : 'password', icon: `${this.state.passwordIcon} ${style.passIcon}`, label: 'Confirm Password *' },
+      {
+        name: 'password',
+        type: this.state.showPassword ? 'text' : 'password',
+        icon: `${this.state.passwordIcon} ${style.passIcon}`,
+        label: 'Password *',
+      },
+      {
+        name: 'confirmPassword',
+        type: this.state.showPassword ? 'text' : 'password',
+        icon: `${this.state.passwordIcon} ${style.passIcon}`,
+        label: 'Confirm Password *',
+      },
       { name: 'firstName', type: 'text', label: 'First Name *' },
       { name: 'lastName', type: 'text', label: 'Last Name *' },
       { name: 'postalCode', type: 'text', label: 'Postal Code' },
@@ -162,7 +189,11 @@ export default class LoginModal extends Component {
                 <button
                   key={switcher.name}
                   name={switcher.name}
-                  className={`${style.switcher} ${this.state.isActive && this.state.activeID === switcher.name ? style.active : ''}`}
+                  className={`${style.switcher} ${
+                    this.state.isActive && this.state.activeID === switcher.name
+                      ? style.active
+                      : ''
+                  }`}
                   value={switcher.name}
                   onClick={this.handleFormSwitch}>
                   {switcher.label}

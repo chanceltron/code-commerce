@@ -27,7 +27,7 @@ The goal is to master components, props, state and conditional UI rendering.
 
 ### :busts_in_silhouette: Signup/Login
 
-- [ ] User can sign-in
+- [x] User can sign-in
 - [x] Password field is obscured
 - [x] There is an "eye" icon next to password to reveal what is being typed
 - [ ] If password is invalid, show an error message as depicted in the screenshot below

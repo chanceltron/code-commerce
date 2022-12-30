@@ -18,15 +18,23 @@ export default class NavBar extends Component {
           <span className={style.typeface}>codeCommerce</span>
         </a>
         <div className={style.buttonContainer}>
-          <button onClick={this.buttonHandler} value='signup' className='btn-primary'>
+          <button
+            onClick={this.buttonHandler}
+            value='signup'
+            className='btn-primary'>
             Sign up
           </button>
-          <button onClick={this.buttonHandler} value='login' className='btn-secondary'>
+          <button
+            onClick={this.buttonHandler}
+            value='login'
+            className='btn-secondary'>
             Log in
           </button>
           <a className='btn-icon'>
             <i className='fa-solid fa-cart-shopping'></i>
-            {this.props.cartLength > 0 && <i className={style.alert}>{this.props.cartLength}</i>}
+            {this.props.cartLength > 0 && (
+              <i className={style.alert}>{this.props.cartLength}</i>
+            )}
           </a>
         </div>
       </div>

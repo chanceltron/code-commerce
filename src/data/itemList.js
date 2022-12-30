@@ -7,6 +7,7 @@ export const itemList = [
     author: 'Maximilian Schwarzmüller',
     rating: 4.8,
     price: 14.99,
+    quantity: 1,
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export const itemList = [
     author: 'Academind by Maximilian Schwarzmüller',
     rating: 4.6,
     price: 19.99,
+    quantity: 1,
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ export const itemList = [
     author: 'Andrei Neagoie, Yihua Zhang, Zero to Mastery',
     rating: 4.6,
     price: 14.99,
+    quantity: 1,
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ export const itemList = [
     author: 'John Smilga',
     rating: 4.7,
     price: 13.99,
+    quantity: 1,
   },
   {
     id: 5,
@@ -43,6 +47,7 @@ export const itemList = [
     author: 'Anthony Alicea',
     rating: 4.8,
     price: 16.99,
+    quantity: 1,
   },
   {
     id: 6,
@@ -52,5 +57,6 @@ export const itemList = [
     author: 'Stephen Grider',
     rating: 4.7,
     price: 16.99,
+    quantity: 1,
   },
 ];
