@@ -1,0 +1,67 @@
+.cartContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: #38383873;
+}
+
+.cartDrawer {
+  max-width: 500px;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.cartClose {
+  position: absolute;
+  font-size: 1.5rem;
+  cursor: pointer;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.cartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.cartItems {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.classCard {
+  max-width: 200px;
+  padding: 1rem;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+.imgContainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+
+.author {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #858585;
+}

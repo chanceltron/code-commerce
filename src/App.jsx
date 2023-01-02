@@ -3,6 +3,7 @@ import Store from './components/Store';
 import Hero from './components/Hero';
 import LoginModal from './components/LoginModal';
 import NavBar from './components/NavBar';
+import Cart from './components/Cart';
 
 import { itemList } from './data/itemList';
 import style from './styles/App.module.css';
@@ -13,8 +14,8 @@ export default class App extends Component {
   state = {
     isLoggedIn: false,
     isInLogin: false,
-    isInSignup: true,
-    isInCart: false,
+    isInSignup: false,
+    isInCart: true,
     cart: initCart,
     users: [
       {
@@ -45,11 +46,10 @@ export default class App extends Component {
   handleNavButton = (value, bool) => {
     if (value === 'login') {
       this.setState({ isInLogin: bool });
-    }
-    if (value === 'signup') {
+    } else if (value === 'signup') {
       this.setState({ isInSignup: bool });
-    } else {
-      this.setState({ value: bool });
+    } else if (value === 'cart') {
+      this.setState({ isInCart: bool });
     }
   };
 
@@ -97,6 +97,17 @@ export default class App extends Component {
       );
     }
 
+    let cartDrawer;
+    if (isInCart) {
+      cartDrawer = (
+        <Cart
+          isInCart={this.state.isInCart}
+          handleNavButton={this.handleNavButton}
+          cart={this.state.cart}
+        />
+      );
+    }
+
     return (
       <div>
         <NavBar
@@ -109,6 +120,7 @@ export default class App extends Component {
           <Store addToCart={this.addToCart} />
         </div>
         {currentModal}
+        {cartDrawer}
       </div>
     );
   }

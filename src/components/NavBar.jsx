@@ -7,6 +7,7 @@ export default class NavBar extends Component {
   }
 
   buttonHandler = ({ target: { value } }) => {
+    console.log(value);
     this.props.handleNavButton(value, true);
   };
 
@@ -44,12 +45,15 @@ export default class NavBar extends Component {
         </a>
         <div className={style.buttonContainer}>
           {navButtons}
-          <a className='btn-icon'>
+          <button
+            className='btn-icon'
+            value='cart'
+            onClick={this.buttonHandler}>
             <i className='fa-solid fa-cart-shopping'></i>
             {this.props.cartLength > 0 && (
               <i className={style.alert}>{this.props.cartLength}</i>
             )}
-          </a>
+          </button>
         </div>
       </div>
     );

@@ -31,7 +31,7 @@ The goal is to master components, props, state and conditional UI rendering.
 - [x] Password field is obscured
 - [x] There is an "eye" icon next to password to reveal what is being typed
 - [x] If password is invalid, show an error message as depicted in the screenshot below
-- [ ] If successful sign-in, take user to Customer Cart
+- [x] If successful sign-in, take user to Customer Cart
 - [x] User can switch between Sign in and Create Account
 - [x] If creating an account there will be two password fields
 - [x] Passwords must match or show appropriate error as depicted below
