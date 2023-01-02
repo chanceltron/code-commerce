@@ -3,33 +3,31 @@ import Store from './components/Store';
 import Hero from './components/Hero';
 import LoginModal from './components/LoginModal';
 import NavBar from './components/NavBar';
+
+import { itemList } from './data/itemList';
 import style from './styles/App.module.css';
-import { OTHERCARDS } from './data/constants';
+
+const initCart = [itemList[0], itemList[2], itemList[3], itemList[5]];
 
 export default class App extends Component {
   state = {
     isLoggedIn: false,
     isInLogin: false,
-    isInSignup: false,
+    isInSignup: true,
     isInCart: false,
-    cart: [],
+    cart: initCart,
     users: [
       {
         id: Date.now(),
-        email: 'chanceludwick@gmail.com',
+        email: 'test@codecommerce.com',
         firstName: 'Chance',
         lastName: 'Ludwick',
-        password: 'Bantrybay1!',
-        postalCode: '76108',
+        password: 'SuperSecure1!',
+        postalCode: '55555',
       },
     ],
     hasDuplicate: false,
   };
-
-  checkDuplicateUsers = (userInput) =>
-    this.state.users.find((user) =>
-      user.email === userInput.email ? true : false
-    );
 
   createNewUser = (newUser) => {
     this.setState((prevState) => ({
@@ -44,12 +42,14 @@ export default class App extends Component {
     );
   };
 
-  handleButton = (value, bool) => {
+  handleNavButton = (value, bool) => {
     if (value === 'login') {
       this.setState({ isInLogin: bool });
     }
     if (value === 'signup') {
       this.setState({ isInSignup: bool });
+    } else {
+      this.setState({ value: bool });
     }
   };
 
@@ -62,32 +62,25 @@ export default class App extends Component {
     }
   };
 
-  handleLogin = (loginUser) => {
-    this.state.users.find((user) => {
-      if (user.email === loginUser.email) {
-        if (user.password === loginUser.password) {
-          this.setState({ isLoggedIn: true });
-          this.handleButton('login', false);
-        } else {
-          console.error('password is incorrect');
-        }
-      } else {
-        console.error('user does not exist');
-      }
-    });
+  handleLogin = () => {
+    this.setState({ isLoggedIn: true });
   };
 
+  componentDidMount() {
+    document.body.style.overflow = 'hidden';
+  }
+
   componentDidUpdate() {
-    console.log(this.state.cart);
+    const { isInSignup, isInLogin, isInCart } = this.state;
+    if (!isInSignup && !isInLogin && !isInCart) {
+      document.body.style.overflow = 'unset';
+    } else {
+      document.body.style.overflow = 'hidden';
+    }
   }
 
   render() {
     const { isLoggedIn, isInLogin, isInSignup, isInCart } = this.state;
-
-    //! Auto-open Signup Modal (for the sake of this project)
-    // setTimeout(() => {
-    //   this.setState({ isInSignup: true });
-    // }, 2000);
 
     // Handle Login vs Signup Modal form
     let currentModal;
@@ -96,9 +89,10 @@ export default class App extends Component {
         <LoginModal
           isInLogin={isInLogin}
           isInSignup={isInSignup}
-          handleButton={this.handleButton}
+          handleNavButton={this.handleNavButton}
           createNewUser={this.createNewUser}
           handleLogin={this.handleLogin}
+          users={this.state.users}
         />
       );
     }
@@ -106,8 +100,9 @@ export default class App extends Component {
     return (
       <div>
         <NavBar
-          handleButton={this.handleButton}
+          handleNavButton={this.handleNavButton}
           cartLength={this.getCartSize()}
+          isLoggedIn={this.state.isLoggedIn}
         />
         <div className='container'>
           <Hero />

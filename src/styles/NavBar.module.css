@@ -42,3 +42,8 @@
   padding: 0.2rem 0.4rem;
   border-radius: 50%;
 }
+
+.loginButtons {
+  display: flex;
+  gap: 1rem;
+}

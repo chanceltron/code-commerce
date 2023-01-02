@@ -7,17 +7,14 @@ export default class NavBar extends Component {
   }
 
   buttonHandler = ({ target: { value } }) => {
-    this.props.handleButton(value, true);
+    this.props.handleNavButton(value, true);
   };
 
   render() {
-    return (
-      <div className={style.navbar}>
-        <a className={style.logo}>
-          <img className={style.logoImg} src='/src/assets/codeCommerce.svg' />
-          <span className={style.typeface}>codeCommerce</span>
-        </a>
-        <div className={style.buttonContainer}>
+    let navButtons;
+    if (!this.props.isLoggedIn) {
+      navButtons = (
+        <div className={style.loginButtons}>
           <button
             onClick={this.buttonHandler}
             value='signup'
@@ -30,6 +27,23 @@ export default class NavBar extends Component {
             className='btn-secondary'>
             Log in
           </button>
+        </div>
+      );
+    } else {
+      navButtons = (
+        <div>
+          <p className={style.welcome}>Welcome!</p>
+        </div>
+      );
+    }
+    return (
+      <div className={style.navbar}>
+        <a className={style.logo}>
+          <img className={style.logoImg} src='/src/assets/codeCommerce.svg' />
+          <span className={style.typeface}>codeCommerce</span>
+        </a>
+        <div className={style.buttonContainer}>
+          {navButtons}
           <a className='btn-icon'>
             <i className='fa-solid fa-cart-shopping'></i>
             {this.props.cartLength > 0 && (

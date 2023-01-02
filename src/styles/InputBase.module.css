@@ -29,3 +29,21 @@
   outline: none;
   border: 1px solid #646cff;
 }
+
+.info {
+  /* margin-top: 10px; */
+  font-size: 0.75rem;
+  padding: 0 5px;
+}
+
+.labelFields {
+  display: flex;
+  justify-content: space-between;
+  padding-block: 5px;
+}
+
+.errorMessage {
+  color: #cc2c53;
+  font-size: 0.8rem;
+  padding: 0;
+}

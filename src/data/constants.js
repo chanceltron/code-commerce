@@ -8,6 +8,11 @@ export const INIT_SIGNUP = {
   postalCode: '',
 };
 
+export const INIT_LOGIN = {
+  loginEmail: '',
+  loginPassword: '',
+};
+
 // CREDIT CARDS
 import VISA_ICON from '../assets/visa.png';
 import MASTERCARD_ICON from '../assets/masterCard.png';

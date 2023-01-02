@@ -3,6 +3,15 @@ import { INIT_SIGNUP } from '../data/constants';
 import style from '../styles/LoginModal.module.css';
 import InputBase from './InputBase';
 
+import {
+  onlyTextValidation,
+  passwordComplexityValidation,
+  passwordMatchValidation,
+  emailValidation,
+  emailDuplicateValidation,
+  postalCodeValidation,
+} from '../data/validations';
+
 export default class LoginModal extends Component {
   constructor(props) {
     super(props);
@@ -13,26 +22,59 @@ export default class LoginModal extends Component {
       passwordIcon: 'fa-regular fa-eye',
       isActive: false,
       activeID: '',
+      error: {},
+      signupHasError: false,
     };
   }
 
+  submitErrorCheck = () => {
+    const { signupHasError } = this.state;
+    let isError = false;
+    if (signupHasError) {
+      isError = true;
+    }
+    return isError;
+  };
+
+  handleLogin = (e) => {
+    e.preventDefault();
+    const { handleLogin, handleNavButton } = this.props;
+    const { email, password } = this.state.signupInputs;
+
+    this.props.users.find((user) => {
+      if (user.email === email) {
+        if (user.password === password) {
+          handleLogin();
+          handleNavButton('login', false);
+        } else {
+          console.error('password is incorrect');
+          this.setState((prevState) => ({
+            signupInputs: { ...prevState.signupInputs, password: '' },
+          }));
+        }
+      } else {
+        console.error('user does not exist');
+      }
+    });
+  };
+
   handleFormSwitch = (e) => {
+    const { handleNavButton } = this.props;
     this.setState({ isActive: true, activeID: e.target.name });
     if (e.target.value === 'login' && !this.props.isInLogin) {
-      this.props.handleButton('login', true);
-      this.props.handleButton('signup', false);
+      handleNavButton('login', true);
+      handleNavButton('signup', false);
     } else {
-      this.props.handleButton('signup', true);
-      this.props.handleButton('login', false);
+      handleNavButton('signup', true);
+      handleNavButton('login', false);
     }
   };
 
   handleClose = () => {
-    if (this.props.isInLogin) {
-      this.props.handleButton('login', false);
-    } else {
-      this.props.handleButton('signup', false);
-    }
+    const { isInLogin, handleNavButton } = this.props;
+    return isInLogin
+      ? handleNavButton('login', false)
+      : handleNavButton('signup', false);
   };
 
   handlePassword = () => {
@@ -51,11 +93,12 @@ export default class LoginModal extends Component {
   };
 
   handleNewUser = (e) => {
-    const { handleButton, createNewUser } = this.props;
-
     e.preventDefault();
+
+    const { handleNavButton, createNewUser } = this.props;
     const { email, firstName, lastName, password, postalCode } =
       this.state.signupInputs;
+    const errorCheck = this.submitErrorCheck();
     const newUser = {
       id: Date.now(),
       email,
@@ -64,23 +107,80 @@ export default class LoginModal extends Component {
       password,
       postalCode,
     };
-    handleButton('login', true);
-    handleButton('signup', false);
-    createNewUser(newUser);
-    this.setState(() => ({
-      signupInputs: INIT_SIGNUP,
-    }));
+    if (!errorCheck) {
+      handleNavButton('login', true);
+      handleNavButton('signup', false);
+      createNewUser(newUser);
+
+      this.setState(() => ({
+        signupInputs: INIT_SIGNUP,
+      }));
+    }
   };
 
-  handleLogin = (e) => {
-    const { email, password } = this.state.signupInputs;
-    e.preventDefault();
-    const loginUser = {
-      email,
-      password,
-    };
-    this.props.handleLogin(loginUser);
+  errorStateToggle = (errorText) => {
+    if (errorText) {
+      this.setState({ signupHasError: true });
+    } else {
+      this.setState({ signupHasError: false });
+    }
   };
+
+  handleValidation = (type, value) => {
+    let errorText;
+    switch (type) {
+      case 'email':
+        errorText = emailValidation(this.props.users, value);
+        this.setState((prevState) => ({
+          error: { ...prevState.error, emailError: errorText },
+        }));
+        this.errorStateToggle(errorText);
+        break;
+      case 'password':
+        errorText = passwordComplexityValidation(value);
+        this.setState((prevState) => ({
+          error: { ...prevState.error, passwordComplexityError: errorText },
+        }));
+        this.errorStateToggle(errorText);
+        break;
+      case 'confirmPassword':
+        errorText = passwordMatchValidation(
+          this.state.signupInputs.password,
+          value
+        );
+        this.setState((prevState) => ({
+          error: { ...prevState.error, passwordMatchError: errorText },
+        }));
+        this.errorStateToggle(errorText);
+        break;
+      case 'firstName':
+        errorText = onlyTextValidation(value);
+        this.setState((prevState) => ({
+          error: { ...prevState.error, firstNameError: errorText },
+        }));
+        this.errorStateToggle(errorText);
+        break;
+      case 'lastName':
+        errorText = onlyTextValidation(value);
+        this.setState((prevState) => ({
+          error: { ...prevState.error, lastNameError: errorText },
+        }));
+        this.errorStateToggle(errorText);
+        break;
+      case 'postalCode':
+        errorText = postalCodeValidation(value);
+        this.setState((prevState) => ({
+          error: { ...prevState.error, postalCodeError: errorText },
+        }));
+        this.errorStateToggle(errorText);
+        break;
+      default:
+        break;
+    }
+  };
+
+  handleBlur = ({ target: { name, value } }) =>
+    this.handleValidation(name, value);
 
   componentDidMount() {
     this.props.isInLogin
@@ -89,8 +189,14 @@ export default class LoginModal extends Component {
   }
 
   render() {
+    const { error } = this.state;
+
     const loginInputs = [
-      { name: 'email', type: 'email', label: 'Email Address *' },
+      {
+        name: 'email',
+        type: 'email',
+        label: 'Email Address *',
+      },
       {
         name: 'password',
         type: this.state.showPassword ? 'text' : 'password',
@@ -100,22 +206,45 @@ export default class LoginModal extends Component {
     ];
 
     const signupInputs = [
-      { name: 'email', type: 'email', label: 'Email Address *' },
+      {
+        name: 'email',
+        type: 'email',
+        label: 'Email Address *',
+        error: 'emailError',
+      },
       {
         name: 'password',
         type: this.state.showPassword ? 'text' : 'password',
         icon: `${this.state.passwordIcon} ${style.passIcon}`,
-        label: 'Password *',
+        label: 'Create Password *',
+        info: 'Password must be 8-20 characters, including at least once capital letter, at least one small letter, one number and one special character - ! @ # $ % ^ & * ( ) _ +',
+        error: 'passwordComplexityError',
       },
       {
         name: 'confirmPassword',
         type: this.state.showPassword ? 'text' : 'password',
         icon: `${this.state.passwordIcon} ${style.passIcon}`,
         label: 'Confirm Password *',
+        error: 'passwordMatchError',
       },
-      { name: 'firstName', type: 'text', label: 'First Name *' },
-      { name: 'lastName', type: 'text', label: 'Last Name *' },
-      { name: 'postalCode', type: 'text', label: 'Postal Code' },
+      {
+        name: 'firstName',
+        type: 'text',
+        label: 'First Name *',
+        error: 'firstNameError',
+      },
+      {
+        name: 'lastName',
+        type: 'text',
+        label: 'Last Name *',
+        error: 'lastNameError',
+      },
+      {
+        name: 'postalCode',
+        type: 'text',
+        label: 'Postal Code',
+        error: 'postalCodeError',
+      },
     ];
 
     const switchers = [
@@ -163,9 +292,14 @@ export default class LoginModal extends Component {
               autoComplete='off'
               icon={input.icon}
               label={input.label}
+              info={input.info}
               handlePassword={this.handlePassword}
-              // onBlur={}
-              // error={}
+              onBlur={this.handleBlur}
+              errorM={
+                error && error[input.error] && error[input.error].length > 1
+                  ? error[input.error]
+                  : null
+              }
             />
           ))}
           <button className={`${style.btn} btn-primary`}>Create Account</button>
