@@ -8,7 +8,6 @@ import {
   passwordComplexityValidation,
   passwordMatchValidation,
   emailValidation,
-  emailDuplicateValidation,
   postalCodeValidation,
 } from '../data/validations';
 

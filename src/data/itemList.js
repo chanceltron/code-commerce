@@ -37,7 +37,7 @@ export const itemList = [
     author: 'John Smilga',
     rating: 4.7,
     price: 13.99,
-    quantity: 1,
+    quantity: 2,
   },
   {
     id: 5,

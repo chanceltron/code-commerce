@@ -106,8 +106,15 @@
   font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  color: #000;
 }
 
 .trashIcon:hover {
-  color: #c95849;
+  color: #d64c3a;
+}
+
+.quantityContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }

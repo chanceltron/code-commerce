@@ -79,6 +79,10 @@ export default class App extends Component {
     }
   }
 
+  handleQuantity = (value) => {
+    this.setState((prevState) => ({ cart: [...prevState.cart] }));
+  };
+
   render() {
     const { isLoggedIn, isInLogin, isInSignup, isInCart } = this.state;
 
