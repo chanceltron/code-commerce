@@ -11,6 +11,10 @@ export default class Cart extends Component {
     return isInCart & handleNavButton('cart', false);
   };
 
+  handleQuantity = (e) => {
+    this.props.handleQuantity(e.target.value);
+  };
+
   render() {
     return (
       <div className={style.cartContainer}>
@@ -24,12 +28,26 @@ export default class Cart extends Component {
           <div className={style.cartItems}>
             {this.props.cart.map((item) => (
               <div className={style.classCard} key={item.id}>
+                <i className={`${style.trashIcon} fa-solid fa-trash-can`}></i>
                 <div className={style.imgContainer}>
-                  <img src={item.img} alt='' />
+                  <img className={style.image} src={item.img} alt='' />
                 </div>
-                <h4 className={style.title}>{item.name}</h4>
-                <p className={style.author}>{item.author}</p>
-                <h3 className={style.price}>${item.price}</h3>
+                <div className={style.cardInfo}>
+                  <h4 className={style.title}>{item.name}</h4>
+                  {/* <p className={style.author}>{item.author}</p> */}
+                  <div className={style.priceQty}>
+                    <h3 className={style.price}>${item.price}</h3>
+                    <input
+                      className={style.qtyInput}
+                      type='number'
+                      placeholder='Qty'
+                      value={item.quantity}
+                      min='0'
+                      step='1'
+                      // onChange={}
+                    />
+                  </div>
+                </div>
               </div>
             ))}
           </div>
