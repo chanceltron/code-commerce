@@ -27,7 +27,6 @@ export default class App extends Component {
         postalCode: '55555',
       },
     ],
-    hasDuplicate: false,
   };
 
   createNewUser = (newUser) => {
@@ -48,23 +47,22 @@ export default class App extends Component {
       this.setState({ isInLogin: bool });
     } else if (value === 'signup') {
       this.setState({ isInSignup: bool });
-    } else if (value === 'cart') {
+    } else {
       this.setState({ isInCart: bool });
     }
   };
 
   addToCart = (newItem) => {
-    const duplicate = this.state.cart.find((item) => item.id === newItem.id);
-    if (duplicate) {
-      return;
-    } else {
-      this.setState((prevState) => ({ cart: [...prevState.cart, newItem] }));
-    }
+    const cartHasDuplicate = this.state.cart.find(
+      (item) => item.id === newItem.id
+    );
+    !cartHasDuplicate &&
+      this.setState((prevState) => ({
+        cart: [...prevState.cart, newItem],
+      }));
   };
 
-  handleLogin = () => {
-    this.setState({ isLoggedIn: true });
-  };
+  handleLogin = () => this.setState({ isLoggedIn: true });
 
   componentDidMount() {
     document.body.style.overflow = 'hidden';
@@ -79,12 +77,14 @@ export default class App extends Component {
     }
   }
 
+  // TODO - Figure out how to update the quantity of a specific item in the cart
   handleQuantity = (value) => {
     this.setState((prevState) => ({ cart: [...prevState.cart] }));
   };
 
   render() {
-    const { isLoggedIn, isInLogin, isInSignup, isInCart } = this.state;
+    const { isLoggedIn, isInLogin, isInSignup, isInCart, cart, users } =
+      this.state;
 
     // Handle Login vs Signup Modal form
     let currentModal;
@@ -96,7 +96,7 @@ export default class App extends Component {
           handleNavButton={this.handleNavButton}
           createNewUser={this.createNewUser}
           handleLogin={this.handleLogin}
-          users={this.state.users}
+          users={users}
         />
       );
     }
@@ -105,9 +105,9 @@ export default class App extends Component {
     if (isInCart) {
       cartDrawer = (
         <Cart
-          isInCart={this.state.isInCart}
+          isInCart={isInCart}
           handleNavButton={this.handleNavButton}
-          cart={this.state.cart}
+          cart={cart}
         />
       );
     }
@@ -117,7 +117,7 @@ export default class App extends Component {
         <NavBar
           handleNavButton={this.handleNavButton}
           cartLength={this.getCartSize()}
-          isLoggedIn={this.state.isLoggedIn}
+          isLoggedIn={isLoggedIn}
         />
         <div className='container'>
           <Hero />

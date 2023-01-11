@@ -2,14 +2,8 @@ import React, { Component } from 'react';
 import style from '../styles/NavBar.module.css';
 
 export default class NavBar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  buttonHandler = ({ target: { value } }) => {
-    console.log(value);
+  buttonHandler = ({ target: { value } }) =>
     this.props.handleNavButton(value, true);
-  };
 
   render() {
     let navButtons;
@@ -45,15 +39,12 @@ export default class NavBar extends Component {
         </a>
         <div className={style.buttonContainer}>
           {navButtons}
-          <button
-            className='btn-icon'
-            value='cart'
-            onClick={this.buttonHandler}>
+          <a className='btn-icon' onClick={this.buttonHandler}>
             <i className='fa-solid fa-cart-shopping'></i>
             {this.props.cartLength > 0 && (
               <i className={style.alert}>{this.props.cartLength}</i>
             )}
-          </button>
+          </a>
         </div>
       </div>
     );

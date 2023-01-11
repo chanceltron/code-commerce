@@ -12,19 +12,15 @@ import {
 } from '../data/validations';
 
 export default class LoginModal extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      signupInputs: INIT_SIGNUP,
-
-      showPassword: false,
-      passwordIcon: 'fa-regular fa-eye',
-      isActive: false,
-      activeID: '',
-      error: {},
-      signupHasError: false,
-    };
-  }
+  state = {
+    signupInputs: INIT_SIGNUP,
+    showPassword: false,
+    passwordIcon: 'fa-regular fa-eye',
+    isActive: false,
+    activeID: '',
+    error: {},
+    signupHasError: false,
+  };
 
   submitErrorCheck = () => {
     const { signupHasError } = this.state;

@@ -2,22 +2,14 @@ import React, { Component } from 'react';
 import style from '../styles/Cart.module.css';
 
 export default class Cart extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleClose = () => {
     const { isInCart, handleNavButton } = this.props;
     return isInCart & handleNavButton('cart', false);
   };
 
-  handleDelete = () => {
-    console.log('I am deleting this!');
-  };
+  handleDelete = () => console.log('I am deleting this!');
 
-  handleQuantity = (e) => {
-    this.props.handleQuantity(e.target.value);
-  };
+  handleQuantity = (e) => this.props.handleQuantity(e.target.value);
 
   render() {
     return (
