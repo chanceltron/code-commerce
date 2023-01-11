@@ -44,7 +44,7 @@
   flex-direction: column;
   gap: 0.3rem;
   overflow-y: auto;
-  height: 70%;
+  max-height: 60vh;
 }
 
 .classCard {
@@ -117,4 +117,12 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.cartSummary {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
 }

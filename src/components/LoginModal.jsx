@@ -40,7 +40,7 @@ export default class LoginModal extends Component {
       if (user.email === email) {
         if (user.password === password) {
           handleLogin();
-          handleNavButton('login', false);
+          handleNavButton('isInLogin', false);
         } else {
           console.error('password is incorrect');
           this.setState((prevState) => ({
@@ -56,20 +56,20 @@ export default class LoginModal extends Component {
   handleFormSwitch = (e) => {
     const { handleNavButton } = this.props;
     this.setState({ isActive: true, activeID: e.target.name });
-    if (e.target.value === 'login' && !this.props.isInLogin) {
-      handleNavButton('login', true);
-      handleNavButton('signup', false);
+    if (e.target.value === 'isInLogin' && !this.props.isInLogin) {
+      handleNavButton('isInLogin', true);
+      handleNavButton('isInSignup', false);
     } else {
-      handleNavButton('signup', true);
-      handleNavButton('login', false);
+      handleNavButton('isInSignup', true);
+      handleNavButton('isInLogin', false);
     }
   };
 
   handleClose = () => {
     const { isInLogin, handleNavButton } = this.props;
     return isInLogin
-      ? handleNavButton('login', false)
-      : handleNavButton('signup', false);
+      ? handleNavButton('isInLogin', false)
+      : handleNavButton('isInSignup', false);
   };
 
   handlePassword = () => {
@@ -103,8 +103,8 @@ export default class LoginModal extends Component {
       postalCode,
     };
     if (!errorCheck) {
-      handleNavButton('login', true);
-      handleNavButton('signup', false);
+      handleNavButton('isInLogin', true);
+      handleNavButton('isInSignup', false);
       createNewUser(newUser);
 
       this.setState(() => ({
@@ -179,8 +179,8 @@ export default class LoginModal extends Component {
 
   componentDidMount() {
     this.props.isInLogin
-      ? this.setState({ isActive: true, activeID: 'login' })
-      : this.setState({ isActive: true, activeID: 'signup' });
+      ? this.setState({ isActive: true, activeID: 'isInLogin' })
+      : this.setState({ isActive: true, activeID: 'isInSignup' });
   }
 
   render() {
@@ -243,8 +243,8 @@ export default class LoginModal extends Component {
     ];
 
     const switchers = [
-      { name: 'signup', label: 'Create Account' },
-      { name: 'login', label: 'Sign in' },
+      { name: 'isInSignup', label: 'Create Account' },
+      { name: 'isInLogin', label: 'Sign in' },
     ];
 
     let userForm;

@@ -3,8 +3,6 @@ import style from '../styles/Store.module.css';
 import { itemList } from '../data/itemList';
 
 export default class Store extends Component {
-  addToCart = (item) => this.props.addToCart(item);
-
   render() {
     return (
       <div>
@@ -23,7 +21,7 @@ export default class Store extends Component {
                 <h3 className={style.price}>${item.price}</h3>
                 <div className={style.btnContainer}>
                   <button
-                    onClick={() => this.addToCart(item)}
+                    onClick={() => this.props.addToCart(item)}
                     className={style.btn}>
                     +
                   </button>

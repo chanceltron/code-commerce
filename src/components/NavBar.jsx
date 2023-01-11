@@ -12,13 +12,13 @@ export default class NavBar extends Component {
         <div className={style.loginButtons}>
           <button
             onClick={this.buttonHandler}
-            value='signup'
+            value='isInSignup'
             className='btn-primary'>
             Sign up
           </button>
           <button
             onClick={this.buttonHandler}
-            value='login'
+            value='isInLogin'
             className='btn-secondary'>
             Log in
           </button>
@@ -39,7 +39,9 @@ export default class NavBar extends Component {
         </a>
         <div className={style.buttonContainer}>
           {navButtons}
-          <a className='btn-icon' onClick={this.buttonHandler}>
+          <a
+            className='btn-icon'
+            onClick={() => this.props.handleNavButton('isInCart', true)}>
             <i className='fa-solid fa-cart-shopping'></i>
             {this.props.cartLength > 0 && (
               <i className={style.alert}>{this.props.cartLength}</i>

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import style from '../styles/Cart.module.css';
 
+import { itemList } from '../data/itemList';
+
 export default class Cart extends Component {
   handleClose = () => {
     const { isInCart, handleNavButton } = this.props;
-    return isInCart & handleNavButton('cart', false);
+    return isInCart & handleNavButton('isInCart', false);
   };
-
-  handleDelete = () => console.log('I am deleting this!');
 
   handleQuantity = (e) => this.props.handleQuantity(e.target.value);
 
@@ -38,8 +38,10 @@ export default class Cart extends Component {
                         className={style.qtyInput}
                         placeholder='Qty'
                         value={item.quantity}
-                        // onChange={}
-                      >
+                        readOnly
+                        onChange={({ target: { value } }) => {
+                          this.props.handleQuantity(item.id, value);
+                        }}>
                         <option value='1'>1</option>
                         <option value='2'>2</option>
                         <option value='3'>3</option>
@@ -47,7 +49,7 @@ export default class Cart extends Component {
                         <option value='5'>5</option>
                       </select>
                       <a
-                        onClick={this.handleDelete}
+                        onClick={() => this.props.handleRemoveFromCart(item.id)}
                         className={style.deleteBtn}>
                         <i
                           className={`${style.trashIcon} fa-solid fa-trash-can`}
@@ -58,6 +60,10 @@ export default class Cart extends Component {
                 </div>
               </div>
             ))}
+          </div>
+          <div className={style.cartSummary}>
+            <h4>Total Items:</h4>
+            <h4>{this.props.cartLength}</h4>
           </div>
         </div>
       </div>

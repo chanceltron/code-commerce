@@ -37,20 +37,12 @@ export default class App extends Component {
 
   getCartSize = () => {
     return this.state.cart.reduce(
-      (totalItems, item) => totalItems + item.quantity,
+      (totalItems, item) => +totalItems + +item.quantity,
       0
     );
   };
 
-  handleNavButton = (value, bool) => {
-    if (value === 'login') {
-      this.setState({ isInLogin: bool });
-    } else if (value === 'signup') {
-      this.setState({ isInSignup: bool });
-    } else {
-      this.setState({ isInCart: bool });
-    }
-  };
+  handleNavButton = (value, bool) => this.setState({ [value]: bool });
 
   addToCart = (newItem) => {
     const cartHasDuplicate = this.state.cart.find(
@@ -64,23 +56,29 @@ export default class App extends Component {
 
   handleLogin = () => this.setState({ isLoggedIn: true });
 
-  componentDidMount() {
-    document.body.style.overflow = 'hidden';
-  }
+  // TODO - Figure out how to update the quantity of a specific item in the cart
+  handleQuantity = (itemId, newValue) => {
+    this.setState({
+      cart: this.state.cart.map((item) =>
+        item.id === itemId ? { ...item, quantity: +newValue } : item
+      ),
+    });
+  };
 
+  handleRemoveFromCart = (itemId) => {
+    console.log(this.state.cart.filter((item) => itemId !== item.id));
+    const updateCart = this.state.cart.filter((item) => itemId !== item.id);
+    this.setState({ cart: updateCart });
+  };
+
+  // Disable the scroll while in a modal or cart
+  componentDidMount = () => (document.body.style.overflow = 'hidden');
   componentDidUpdate() {
     const { isInSignup, isInLogin, isInCart } = this.state;
-    if (!isInSignup && !isInLogin && !isInCart) {
-      document.body.style.overflow = 'unset';
-    } else {
-      document.body.style.overflow = 'hidden';
-    }
+    !isInSignup && !isInLogin && !isInCart
+      ? (document.body.style.overflow = 'unset')
+      : (document.body.style.overflow = 'hidden');
   }
-
-  // TODO - Figure out how to update the quantity of a specific item in the cart
-  handleQuantity = (value) => {
-    this.setState((prevState) => ({ cart: [...prevState.cart] }));
-  };
 
   render() {
     const { isLoggedIn, isInLogin, isInSignup, isInCart, cart, users } =
@@ -108,6 +106,9 @@ export default class App extends Component {
           isInCart={isInCart}
           handleNavButton={this.handleNavButton}
           cart={cart}
+          cartLength={this.getCartSize()}
+          handleRemoveFromCart={this.handleRemoveFromCart}
+          handleQuantity={this.handleQuantity}
         />
       );
     }
