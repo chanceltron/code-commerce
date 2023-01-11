@@ -16,7 +16,7 @@ export default class App extends Component {
     isInLogin: false,
     isInSignup: false,
     isInCart: true,
-    cart: initCart,
+    cart: [], //initCart,
     users: [
       {
         id: Date.now(),

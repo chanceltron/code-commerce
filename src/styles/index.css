@@ -137,3 +137,12 @@ input:focus {
   left: 0.5em;
   margin-right: -50%;
 }
+
+.disabled {
+  cursor: not-allowed;
+  background: #ccc;
+}
+
+.disabled:hover {
+  background: #ccc;
+}

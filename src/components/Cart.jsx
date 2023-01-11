@@ -9,9 +9,20 @@ export default class Cart extends Component {
     return isInCart & handleNavButton('isInCart', false);
   };
 
-  handleQuantity = (e) => this.props.handleQuantity(e.target.value);
-
   render() {
+    const emptyCartWarning = !this.props.cartLength && (
+      <div className={style.emptyCartWarningContainer}>
+        <div>
+          <i className='fa-sharp fa-solid fa-circle-exclamation'></i>
+        </div>
+        <h3>Your Cart is Empty!</h3>
+      </div>
+    );
+
+    const totalPrice = this.props.cart.reduce((acc, currentItem) => {
+      return (+acc + currentItem.price * currentItem.quantity).toFixed(2);
+    }, 0);
+
     return (
       <div className={style.cartContainer}>
         <div className={style.cartDrawer}>
@@ -22,6 +33,7 @@ export default class Cart extends Component {
             <h2>Summary</h2>
           </div>
           <div className={style.cartItems}>
+            {emptyCartWarning}
             {this.props.cart.map((item) => (
               <div className={style.classCard} key={item.id}>
                 <div className={style.imgContainer}>
@@ -62,8 +74,20 @@ export default class Cart extends Component {
             ))}
           </div>
           <div className={style.cartSummary}>
-            <h4>Total Items:</h4>
-            <h4>{this.props.cartLength}</h4>
+            <div className={style.itemTotal}>
+              <h3>Total Items:</h3>
+              <h3>{this.props.cartLength}</h3>
+            </div>
+            <h2>${totalPrice}</h2>
+          </div>
+          <div className={style.checkoutBtnContainer}>
+            <button
+              disabled={this.props.cartLength === 0}
+              className={`${style.checkoutBtn} ${
+                this.props.cartLength === 0 && `disabled`
+              } btn-primary btn`}>
+              Checkout
+            </button>
           </div>
         </div>
       </div>

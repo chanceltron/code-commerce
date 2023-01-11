@@ -47,7 +47,7 @@ The goal is to master components, props, state and conditional UI rendering.
 - [x] These should be actual components with item value
 - [x] The total sum of all items should be calculated as a total
 - [x] Items can be removed and quantities can be increased or decreased -- cart total should adjust accordingly
-- [ ] If there are zero cart items the Checkout button should be disabled
+- [x] If there are zero cart items the Checkout button should be disabled
 - [ ] If Checkout is selected move to the shipping screen
 
 ### :airplane: Shipping Information
