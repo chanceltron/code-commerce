@@ -77,8 +77,26 @@ The goal is to master components, props, state and conditional UI rendering.
 - [ ] Should show last 4 digits of credit card used to make the purchase
 - [ ] Add other UI as depicted below
 
+---
+
 ## Mockups
 
 ### Login/Signup Screen
 
 ![Alt text](https://files.cdn.thinkific.com/file_uploads/88925/images/e70/22d/709/1.png 'Login/Signup Screen')
+
+### Cart Screen
+
+![Alt text](https://files.cdn.thinkific.com/file_uploads/88925/images/f56/3c6/e25/2.png 'Cart Screen')
+
+### Shipping Screen
+
+![Alt text](https://files.cdn.thinkific.com/file_uploads/88925/images/a2b/785/b19/3.png 'Shipping Screen')
+
+### Payment Screen
+
+![Alt text](https://files.cdn.thinkific.com/file_uploads/88925/images/a62/250/95d/4.png 'Payment Screen')
+
+### Confirmation Screen
+
+![Alt text](https://files.cdn.thinkific.com/file_uploads/88925/images/cb3/e52/b92/5.png 'Confirmation Screen')
