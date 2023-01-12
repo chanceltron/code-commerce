@@ -81,4 +81,4 @@ The goal is to master components, props, state and conditional UI rendering.
 
 ### Login/Signup Screen
 
-![Alt text](https://1drv.ms/u/s!AvfgXk_59WZPjcFEOX7LAxUFknMC6w?e=7RpMR4 'Login/Signup Screen')
+![Alt text](https://files.cdn.thinkific.com/file_uploads/88925/images/e70/22d/709/1.png 'Login/Signup Screen')
