@@ -87,7 +87,7 @@ The goal is to master components, props, state and conditional UI rendering.
 
 ### Cart Screen
 
-![Alt text](https://files.cdn.thinkific.com/file_uploads/88925/images/f56/3c6/e25/2.png 'Cart Screen')
+![Alt text](https://files.cdn.thinkific.com/file_uploads/88925/images/f56/3c6/e25/2.png?width=1920 'Cart Screen')
 
 ### Shipping Screen
 
