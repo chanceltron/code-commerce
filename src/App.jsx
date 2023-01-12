@@ -3,7 +3,7 @@ import Store from './components/Store';
 import Hero from './components/Hero';
 import LoginModal from './components/LoginModal';
 import NavBar from './components/NavBar';
-import Cart from './components/Cart';
+import Checkout from './components/Checkout';
 
 import { itemList } from './data/itemList';
 import style from './styles/App.module.css';
@@ -85,9 +85,9 @@ export default class App extends Component {
       this.state;
 
     // Handle Login vs Signup Modal form
-    let currentModal;
+    let currentPopup;
     if (isInLogin || isInSignup) {
-      currentModal = (
+      currentPopup = (
         <LoginModal
           isInLogin={isInLogin}
           isInSignup={isInSignup}
@@ -97,12 +97,9 @@ export default class App extends Component {
           users={users}
         />
       );
-    }
-
-    let cartDrawer;
-    if (isInCart) {
-      cartDrawer = (
-        <Cart
+    } else if (isInCart) {
+      currentPopup = (
+        <Checkout
           isInCart={isInCart}
           handleNavButton={this.handleNavButton}
           cart={cart}
@@ -112,6 +109,20 @@ export default class App extends Component {
         />
       );
     }
+
+    // let cartDrawer;
+    // if (isInCart) {
+    //   cartDrawer = (
+    //     <Cart
+    //       isInCart={isInCart}
+    //       handleNavButton={this.handleNavButton}
+    //       cart={cart}
+    //       cartLength={this.getCartSize()}
+    //       handleRemoveFromCart={this.handleRemoveFromCart}
+    //       handleQuantity={this.handleQuantity}
+    //     />
+    //   );
+    // }
 
     return (
       <div>
@@ -124,8 +135,7 @@ export default class App extends Component {
           <Hero />
           <Store addToCart={this.addToCart} />
         </div>
-        {currentModal}
-        {cartDrawer}
+        {currentPopup}
       </div>
     );
   }

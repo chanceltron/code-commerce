@@ -76,3 +76,9 @@ The goal is to master components, props, state and conditional UI rendering.
 - [ ] Should show amount paid
 - [ ] Should show last 4 digits of credit card used to make the purchase
 - [ ] Add other UI as depicted below
+
+## Mockups
+
+### Login/Signup Screen
+
+![Alt text](https://1drv.ms/u/s!AvfgXk_59WZPjcFEOX7LAxUFknMC6w?e=7RpMR4 'Login/Signup Screen')
